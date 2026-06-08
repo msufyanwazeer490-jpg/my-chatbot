@@ -24,7 +24,7 @@ app.post("/chat", async (req, res) => {
         "Authorization": `Bearer ${API_KEY}`
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192",
+      model: "llama-3.3-70b-versatile",
         max_tokens: 500,
         messages: [
           { role: "system", content: "You are a helpful AI assistant for a business. Answer customer queries politely and professionally. Keep answers short and clear." },
