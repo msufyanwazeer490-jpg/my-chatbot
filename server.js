@@ -34,11 +34,18 @@ app.post("/chat", async (req, res) => {
     });
 
     const data = await response.json();
+    console.log("Groq response:", JSON.stringify(data));
+
+    if (!data.choices || !data.choices[0]) {
+      return res.status(500).json({ error: "No response from AI: " + JSON.stringify(data) });
+    }
+
     const reply = data.choices[0].message.content;
     res.json({ reply });
 
   } catch (error) {
-    res.status(500).json({ error: "Something went wrong. Please try again." });
+    console.error("Error:", error.message);
+    res.status(500).json({ error: error.message || "Something went wrong." });
   }
 });
 
